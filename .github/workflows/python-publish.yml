@@ -81,15 +81,20 @@ jobs:
         pytest --collect-only
         pytest --verbose --timeout=60 --durations=0 --showlocals --maxfail=2
 
+    - name: Run Dockerfile Lint
+      shell: bash
+      run: |
+        docker container run --rm -i hadolint/hadolint:v1.18.0-2-g99ff4a4-alpine < Dockerfile || echo $$
+
     - name: Run Build
       shell: bash
       run: |
-        docker image build -t ryuichi1208/cache-pys .
+        docker image build -t ryuichi1208/${{ env.app-name }} .
         docker image ls --no-trunc
-        docker image save ryuichi1208/cache-pys -o ${{ env.app-name }}.tar
+        mkdir -p ./images && docker image save ryuichi1208/${{ env.app-name }} -o images/${{ env.app-name }}.tar
         
     - name: Upload Docker Image
       uses: actions/upload-artifact@v2
       with:
         name: ${{ env.app-name }}
-        path: ${{ env.app-name }}
+        path: images/${{ env.app-name }}.tar
