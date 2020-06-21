@@ -14,6 +14,7 @@ on:
 env:
   cache-version: v1.0.0
   PYTHONUNBUFFERED: 0
+  DOCKER_BUILDKIT: 1
 
 jobs:
   ci:
@@ -75,5 +76,5 @@ jobs:
 
     - name: Run Build
       run: 
-        docker image build -t ryuichi1208/cache-pys:${GITHUB_RUN_ID}
+        docker image build -t ryuichi1208/cache-pys .
         docker image ls --digests
