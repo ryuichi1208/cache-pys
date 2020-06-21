@@ -13,6 +13,7 @@ on:
 
 env:
   cache-version: v1.0.0
+  PYTHONUNBUFFERED: 0
 
 jobs:
   ci:
@@ -71,3 +72,8 @@ jobs:
       run: |
         pytest --collect-only
         pytest --verbose --timeout=60 --durations=0 --showlocals --maxfail=2
+
+    - name: Run Build
+      run: 
+        docker image build -t ryuichi1208/cache-pys:${GITHUB_RUN_ID}
+        docker image ls --digests
