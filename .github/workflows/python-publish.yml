@@ -12,6 +12,7 @@ on:
       - master
 
 env:
+  app-name: cache-pys
   cache-version: v1.0.0
   PYTHONUNBUFFERED: 0
   DOCKER_BUILDKIT: 1
@@ -85,3 +86,10 @@ jobs:
       run: |
         docker image build -t ryuichi1208/cache-pys .
         docker image ls --no-trunc
+        docker image save ryuichi1208/cache-pys -o ${{ env.app-name }}.tar
+        
+    - name: Upload Docker Image
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ env.app-name }}
+        path: ${{ env.app-name }}
