@@ -77,4 +77,4 @@ jobs:
     - name: Run Build
       run: 
         docker image build -t ryuichi1208/cache-pys .
-        docker image ls --digests
+        docker image ls --no-trunc
