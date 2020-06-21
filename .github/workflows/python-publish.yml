@@ -98,3 +98,4 @@ jobs:
       with:
         name: ${{ env.app-name }}
         path: images/${{ env.app-name }}.tar
+      if: github.ref == 'refs/heads/master'
