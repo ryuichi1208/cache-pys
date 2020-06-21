@@ -42,8 +42,18 @@ jobs:
     - name: Install CI tools
       run: |
         pip install \
+          flake8==3.7.9 \
+          mypy==0.781 \
           black==19.10b0 \
           pytest==4.6.11 \
           pytest-cov==2.10.0 \
           pytest-html==2.1.1 \
           pytest-timeout==1.4.1
+          
+    - name: Run Static analysis
+      run: |
+        flake8 --count --benchmark .
+
+    - name: Run Formatter
+      run: |
+        black --check --verbose --diff .
