@@ -34,7 +34,9 @@ jobs:
         path: ~/.cache/pip
         key: ${{ env.cache-version }}-${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
-          ${{ runner.os }}-pip-
+          ${{ env.cache-version }}-${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          ${{ env.cache-version }}-${{ runner.os }}-pip-
+          ${{ env.cache-version }}-
 
     - name: Install dependencies
       run: |
