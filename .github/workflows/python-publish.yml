@@ -11,8 +11,11 @@ on:
     branches:
       - master
 
+env:
+  cache-version: v1.0.0
+
 jobs:
-  deploy:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,7 +32,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        key: ${{ env.cache-version }}-${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
 
@@ -41,7 +44,7 @@ jobs:
         
     - name: Install CI tools
       run: |
-        pip install \
+        pip install -U --verbose --timeout 60\
           flake8==3.7.9 \
           mypy==0.781 \
           black==19.10b0 \
@@ -57,3 +60,12 @@ jobs:
     - name: Run Formatter
       run: |
         black --check --verbose --diff .
+        
+    - name: Run Type check
+      run: |
+        mypy .
+        
+    - name: Run Test
+      run: |
+        pytest --collect-only
+        pytest --verbose --timeout=60 --durations=0 --showlocals --maxfail=2
