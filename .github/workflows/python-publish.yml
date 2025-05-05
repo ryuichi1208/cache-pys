@@ -159,7 +159,7 @@ jobs:
           mkdir -p ./images && docker image save ryuichi1208/${{ env.app-name }} -o images/${{ env.app-name }}.tar
 
       - name: Upload Docker Image
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.app-name }}
           path: images/${{ env.app-name }}.tar
