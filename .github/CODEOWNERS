@@ -1,0 +1,14 @@
+# This file defines the code owners for the repository
+# Each line is a file pattern followed by one or more owners
+
+# These owners will be the default owners for everything in the repo
+* @ryuichi1208
+
+# Cache implementation
+/cache_pys/cache.py @ryuichi1208
+
+# CI configurations
+/.github/workflows/ @ryuichi1208
+
+# Tests
+/tests/ @ryuichi1208
