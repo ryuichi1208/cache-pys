@@ -39,7 +39,7 @@ jobs:
           python-version: "3.8"
 
       - name: Cache related processing
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pip
           key: ${{ env.cache-version }}-${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
