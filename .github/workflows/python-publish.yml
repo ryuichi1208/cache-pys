@@ -71,7 +71,7 @@ jobs:
             pytest-timeout>=2.1.0
 
       - name: Run linting
-        uses: pre-commit/action@v3.0.0
+        uses: pre-commit/action@v3.0.1
 
       - name: Run Test with Different Cache Strategies
         shell: bash
